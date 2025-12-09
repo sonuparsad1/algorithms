@@ -1,51 +1,30 @@
-# Configuration for Jekyll theme
+# Configuration for GitHub Pages
+# Site is deployed as pure HTML (no Jekyll processing needed)
 
-theme: minima
-
-# Site metadata
 title: Algorithms & Data Structures
 description: A comprehensive repository of algorithms, data structures, and Python programming concepts
 author: Sonu Parsad
 url: https://sonuparsad1.github.io/algorithms
 baseurl: /algorithms
 
-# Navigation
-header_pages:
-  - index.md
-  - python-theory.md
-  - algorithms.md
-  - numpy-tutorials.md
-  - getting-started.md
-
 # Build settings
 markdown: kramdown
-kramdown:
-  input: GFM
-  hard_wrap: false
 
-# Plugins
-plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
-  - jekyll-sitemap
-
-# Defaults
-defaults:
-  - scope:
-      path: ""
-    values:
-      layout: default
-
-# Exclude files
+# Exclude files from being processed
 exclude:
   - .git/
   - .gitignore
+  - .nojekyll
   - README.md
   - CLONE_GUIDE.md
   - GITHUB_PAGES_SETUP.md
+  - HTML_FILES_MANIFEST.md
   - venv/
   - __pycache__/
   - *.pyc
   - node_modules/
-  - Gemfile
-  - Gemfile.lock
+  - Algorithms-and-Data-Structures-Python/
+  - Python_Theory/
+  - python/
+  - nunpy/
+  - public/
