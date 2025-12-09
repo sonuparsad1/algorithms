@@ -47,17 +47,39 @@
         .welcome-screen { text-align: center; padding: 3rem; }
         .welcome-screen h1 { font-size: 2.5rem; margin-bottom: 1rem; }
         .hidden { display: none !important; }
+        .sidebar-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); z-index: 999; }
+        .sidebar-overlay.visible { display: block; }
+        .sidebar-close { display: none; background: none; border: none; color: #c9d1d9; cursor: pointer; font-size: 1.5rem; padding: 0.5rem; }
         @media (max-width: 768px) {
-            .sidebar { position: fixed; left: 0; top: 0; height: 100vh; z-index: 1000; transform: translateX(-100%); transition: transform 0.3s; }
+            .app-layout { flex-direction: column; }
+            .sidebar { position: fixed; left: 0; top: 0; height: 100vh; width: 280px; z-index: 1000; transform: translateX(-100%); transition: transform 0.3s; max-width: 90vw; }
             .sidebar.visible { transform: translateX(0); }
             .menu-toggle { display: block; }
+            .sidebar-close { display: block; }
+            .sidebar-header { display: flex; justify-content: space-between; align-items: center; }
+            .content-scroll-container { padding: 1rem; }
+            .markdown-body h1 { font-size: 1.5rem; }
+            .markdown-body h2 { font-size: 1.2rem; }
+            .markdown-body h3 { font-size: 1rem; }
+            .nav-item { padding: 0.4rem 0.8rem 0.4rem 1rem; font-size: 0.85rem; }
+        }
+        @media (max-width: 480px) {
+            .sidebar { width: 100vw; max-width: 100vw; }
+            .content-scroll-container { padding: 0.8rem; }
+            .markdown-body { margin: 0; }
+            .top-bar { padding: 0.8rem 1rem; gap: 0.5rem; }
+            .breadcrumbs { font-size: 0.8rem; }
         }
     </style>
 </head>
 <body>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
     <div class="app-layout">
         <aside class="sidebar" id="sidebar">
-            <div class="sidebar-header"><div class="brand">ALGORITHMS</div></div>
+            <div class="sidebar-header">
+                <div class="brand">ALGORITHMS</div>
+                <button class="sidebar-close" id="sidebarClose">✕</button>
+            </div>
             <div class="search-container">
                 <input type="text" id="searchInput" placeholder="Search topics...">
                 <div id="searchResults" class="search-results hidden"></div>
@@ -110,9 +132,24 @@
             bindEvents() {
                 const toggle = document.getElementById('menu-toggle');
                 const sidebar = document.getElementById('sidebar');
+                const closeBtn = document.getElementById('sidebarClose');
+                const overlay = document.getElementById('sidebarOverlay');
+                
+                const closeSidebar = () => {
+                    sidebar.classList.remove('visible');
+                    overlay.classList.remove('visible');
+                };
+                
                 toggle.addEventListener('click', () => {
-                    if (window.innerWidth <= 768) sidebar.classList.toggle('visible');
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.toggle('visible');
+                        overlay.classList.toggle('visible');
+                    }
                 });
+                
+                closeBtn.addEventListener('click', closeSidebar);
+                overlay.addEventListener('click', closeSidebar);
+                
                 const search = document.getElementById('searchInput');
                 const results = document.getElementById('searchResults');
                 search.addEventListener('input', (e) => {
@@ -124,7 +161,7 @@
                         el.addEventListener('click', () => {
                             window.location.hash = el.dataset.path;
                             results.classList.add('hidden');
-                            if (window.innerWidth <= 768) sidebar.classList.remove('visible');
+                            closeSidebar();
                         });
                     });
                     results.classList.remove('hidden');
