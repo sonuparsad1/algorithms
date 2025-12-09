@@ -1,0 +1,40 @@
+# Configuration for Jekyll theme
+
+theme: minima
+
+# Site metadata
+title: Algorithms & Data Structures
+description: A comprehensive repository of algorithms, data structures, and Python programming concepts
+author: Sonu Parsad
+url: https://sonuparsad1.github.io/algorithms
+
+# Navigation
+header_pages:
+  - index.md
+  - python-theory.md
+  - algorithms.md
+  - numpy-tutorials.md
+  - getting-started.md
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Exclude files
+exclude:
+  - .git/
+  - .gitignore
+  - README.md
+  - CLONE_GUIDE.md
+  - venv/
+  - __pycache__/
+  - *.pyc
+  - node_modules/

@@ -1,0 +1,13 @@
+# robots.txt for GitHub Pages site
+
+User-agent: *
+Allow: /
+
+Sitemap: https://sonuparsad1.github.io/algorithms/sitemap.xml
+
+# Allow search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /

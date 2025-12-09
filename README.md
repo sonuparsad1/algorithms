@@ -2,6 +2,12 @@
 
 A comprehensive collection of algorithms, data structures, and Python programming theory with implementations and examples.
 
+## 🌐 Visit the Website
+
+**[📖 View on GitHub Pages](https://sonuparsad1.github.io/algorithms/)**
+
+The documentation is best viewed on the official GitHub Pages site. Start with the [Getting Started](https://sonuparsad1.github.io/algorithms/getting-started/) guide!
+
 ## 📁 Project Structure
 
 ```
