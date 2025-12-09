@@ -25,9 +25,15 @@
         .result-item { padding: 0.6rem 0.8rem; cursor: pointer; border-bottom: 1px solid #30363d; }
         .result-item:hover { background: rgba(88, 166, 255, 0.1); }
         .nav-tree { padding: 1rem 0; }
-        .nav-item { cursor: pointer; padding: 0.7rem 1rem; border-left: 3px solid transparent; transition: all 0.2s; }
+        .nav-group { margin-bottom: 0.5rem; }
+        .nav-group-title { cursor: pointer; padding: 0.7rem 1rem; font-weight: 600; color: #79c0ff; display: flex; align-items: center; gap: 0.5rem; }
+        .nav-group-title:hover { background: rgba(88, 166, 255, 0.1); }
+        .nav-group-title .toggle { display: inline-block; width: 1rem; }
+        .nav-group.collapsed .nav-submenu { display: none; }
+        .nav-submenu { padding-left: 0.5rem; }
+        .nav-item { cursor: pointer; padding: 0.5rem 1rem 0.5rem 2rem; border-left: 3px solid transparent; transition: all 0.2s; font-size: 0.85rem; }
         .nav-item:hover { background: rgba(88, 166, 255, 0.1); border-left-color: #58a6ff; }
-        .nav-item.active { background: rgba(88, 166, 255, 0.2); border-left-color: #58a6ff; color: #58a6ff; font-weight: 600; }
+        .nav-item.active { background: rgba(88, 166, 255, 0.2); border-left-color: #58a6ff; color: #58a6ff; }
         .main-content { flex: 1; display: flex; flex-direction: column; background: #0d1117; }
         .top-bar { padding: 1rem 2rem; background: rgba(22, 27, 34, 0.5); border-bottom: 1px solid #30363d; display: flex; align-items: center; gap: 1rem; }
         .menu-toggle { display: none; background: none; border: none; color: #c9d1d9; cursor: pointer; font-size: 1.2rem; }
@@ -48,13 +54,10 @@
         .welcome-screen h1 { font-size: 2.5rem; margin-bottom: 1rem; }
         .hidden { display: none !important; }
         @media (max-width: 768px) {
-            .sidebar { position: fixed; left: 0; top: 0; height: 100vh; z-index: 1000; transform: translateX(-100%); transition: transform 0.3s; }
+            .sidebar { position: fixed; left: 0; top: 0; height: 100vh; width: 280px; z-index: 1000; transform: translateX(-100%); transition: transform 0.3s; }
             .sidebar.visible { transform: translateX(0); }
             .menu-toggle { display: block; }
         }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0d1117; }
-        ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 4px; }
     </style>
 </head>
 <body>
@@ -72,7 +75,7 @@
                 <button id="menu-toggle" class="menu-toggle">☰</button>
                 <div id="breadcrumbs" class="breadcrumbs"></div>
             </header>
-            <div class="content-scroll-container" id="content-scroll">
+            <div class="content-scroll-container">
                 <div id="content" class="markdown-body">
                     <div class="welcome-screen">
                         <h1>Welcome to Python Theory</h1>
@@ -84,29 +87,195 @@
     </div>
     <script>
         const MODULES = [
-            { title: '1. Introduction', path: 'intro', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/01_Introduction/01_Definition.md' },
-            { title: '2. Basic Syntax', path: 'syntax', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/02_Basic_Syntax/01_Indentation_and_Comments.md' },
-            { title: '3. Data Types', path: 'datatypes', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/03_Data_Types/01_Overview.md' },
-            { title: '4. Operators & Expressions', path: 'operators', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/04_Operators_and_Expressions/01_Arithmetic.md' },
-            { title: '5. Control Flow', path: 'control', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/05_Control_Flow/01_Conditional_Statements.md' },
-            { title: '6. Functions', path: 'functions', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/06_Functions/01_Definition_Syntax.md' },
-            { title: '7. Modules & Packages', path: 'modules', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/07_Modules_and_Packages/01_Definition.md' },
-            { title: '8. Strings', path: 'strings', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/08_Strings/01_Definition.md' },
-            { title: '9. Collections', path: 'collections', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/09_Lists_Tuples_Sets_Dicts/01_Definition.md' },
-            { title: '10. OOP', path: 'oop', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/10_OOP_in_Python/README.md' },
-            { title: '11. Error Handling', path: 'errors', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/11_Error_and_Exception_Handling/README.md' },
-            { title: '12. File Handling', path: 'files', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/12_File_Handling/README.md' },
-            { title: '13. Iterators & Generators', path: 'iterators', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/13_Iterators_and_Generators/README.md' },
-            { title: '14. Decorators', path: 'decorators', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/14_Decorators/README.md' },
-            { title: '15. Comprehensions', path: 'comprehensions', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/15_Comprehensions/README.md' },
-            { title: '16. Standard Library', path: 'stdlib', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/16_Standard_Library_Overview/README.md' },
-            { title: '17. Advanced Topics', path: 'advanced', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/17_Advanced_Topics/README.md' }
+            { 
+                title: '1. Introduction', 
+                path: 'intro',
+                files: [
+                    { name: 'Definition', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/01_Introduction/01_Definition.md' },
+                    { name: 'Theory', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/01_Introduction/02_Theory.md' },
+                    { name: 'Properties & Uses', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/01_Introduction/03_Properties_and_Uses.md' },
+                    { name: 'Syntax & Methods', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/01_Introduction/04_Syntax_and_Methods.md' },
+                    { name: 'Examples', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/01_Introduction/05_Examples.md' },
+                    { name: 'Common Errors', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/01_Introduction/06_Common_Errors.md' },
+                    { name: 'Practice Questions', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/01_Introduction/07_Practice_Questions.md' }
+                ]
+            },
+            { 
+                title: '2. Basic Syntax', 
+                path: 'syntax',
+                files: [
+                    { name: 'Indentation & Comments', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/02_Basic_Syntax/01_Indentation_and_Comments.md' },
+                    { name: 'Variables & Constants', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/02_Basic_Syntax/02_Variables_and_Constants.md' },
+                    { name: 'Input/Output', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/02_Basic_Syntax/03_Input_Output.md' },
+                    { name: 'Practice Questions', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/02_Basic_Syntax/04_Practice_Questions.md' }
+                ]
+            },
+            { 
+                title: '3. Data Types', 
+                path: 'datatypes',
+                files: [
+                    { name: 'Overview', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/03_Data_Types/01_Overview.md' },
+                    { name: 'Numbers', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/03_Data_Types/02_Numbers.md' },
+                    { name: 'Booleans', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/03_Data_Types/03_Booleans.md' },
+                    { name: 'Type Conversion', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/03_Data_Types/04_Type_Conversion.md' },
+                    { name: 'NoneType', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/03_Data_Types/05_NoneType.md' },
+                    { name: 'Practice Questions', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/03_Data_Types/06_Practice_Questions.md' }
+                ]
+            },
+            { 
+                title: '4. Operators & Expressions', 
+                path: 'operators',
+                files: [
+                    { name: 'Arithmetic', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/04_Operators_and_Expressions/01_Arithmetic.md' },
+                    { name: 'Comparison & Logical', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/04_Operators_and_Expressions/02_Comparison_Logical.md' },
+                    { name: 'Assignment & Bitwise', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/04_Operators_and_Expressions/03_Assignment_Bitwise.md' },
+                    { name: 'Membership & Identity', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/04_Operators_and_Expressions/04_Membership_Identity.md' },
+                    { name: 'Operator Precedence', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/04_Operators_and_Expressions/05_Operator_Precedence.md' },
+                    { name: 'Practice Questions', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/04_Operators_and_Expressions/06_Practice_Questions.md' }
+                ]
+            },
+            { 
+                title: '5. Control Flow', 
+                path: 'control',
+                files: [
+                    { name: 'Conditional Statements', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/05_Control_Flow/01_Conditional_Statements.md' },
+                    { name: 'For Loops', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/05_Control_Flow/02_Loops_For.md' },
+                    { name: 'While Loops', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/05_Control_Flow/03_Loops_While.md' },
+                    { name: 'Loop Control', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/05_Control_Flow/04_Loop_Control_Statements.md' },
+                    { name: 'Practice Questions', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/05_Control_Flow/05_Practice_Questions.md' }
+                ]
+            },
+            { 
+                title: '6. Functions', 
+                path: 'functions',
+                files: [
+                    { name: 'Definition & Syntax', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/06_Functions/01_Definition_Syntax.md' },
+                    { name: 'Parameters & Arguments', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/06_Functions/02_Parameters_Arguments.md' },
+                    { name: 'Return Statement', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/06_Functions/03_Return_Statement.md' },
+                    { name: 'Scope & Lifetime', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/06_Functions/04_Scope_Lifetime.md' },
+                    { name: 'Lambda Functions', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/06_Functions/05_Lambda_Functions.md' },
+                    { name: 'Recursion', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/06_Functions/06_Recursion.md' },
+                    { name: 'Practice Questions', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/06_Functions/07_Practice_Questions.md' }
+                ]
+            },
+            { 
+                title: '7. Modules & Packages', 
+                path: 'modules',
+                files: [
+                    { name: 'Definition', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/07_Modules_and_Packages/01_Definition.md' },
+                    { name: 'Theory', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/07_Modules_and_Packages/02_Theory.md' },
+                    { name: 'Properties & Uses', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/07_Modules_and_Packages/03_Properties_and_Uses.md' },
+                    { name: 'Syntax & Methods', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/07_Modules_and_Packages/04_Syntax_and_Methods.md' },
+                    { name: 'Examples', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/07_Modules_and_Packages/05_Examples.md' },
+                    { name: 'Common Errors', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/07_Modules_and_Packages/06_Common_Errors.md' },
+                    { name: 'Practice Questions', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/07_Modules_and_Packages/07_Practice_Questions.md' }
+                ]
+            },
+            { 
+                title: '8. Strings', 
+                path: 'strings',
+                files: [
+                    { name: 'Definition', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/08_Strings/01_Definition.md' },
+                    { name: 'Theory', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/08_Strings/02_Theory.md' },
+                    { name: 'Properties & Uses', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/08_Strings/03_Properties_and_Uses.md' },
+                    { name: 'Syntax & Methods', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/08_Strings/04_Syntax_and_Methods.md' },
+                    { name: 'Examples', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/08_Strings/05_Examples.md' },
+                    { name: 'Common Errors', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/08_Strings/06_Common_Errors.md' },
+                    { name: 'Practice Questions', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/08_Strings/07_Practice_Questions.md' }
+                ]
+            },
+            { 
+                title: '9. Collections', 
+                path: 'collections',
+                files: [
+                    { name: 'Definition', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/09_Lists_Tuples_Sets_Dicts/01_Definition.md' },
+                    { name: 'Theory', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/09_Lists_Tuples_Sets_Dicts/02_Theory.md' },
+                    { name: 'Properties & Uses', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/09_Lists_Tuples_Sets_Dicts/03_Properties_and_Uses.md' },
+                    { name: 'Syntax & Methods', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/09_Lists_Tuples_Sets_Dicts/04_Syntax_and_Methods.md' },
+                    { name: 'Examples', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/09_Lists_Tuples_Sets_Dicts/05_Examples.md' },
+                    { name: 'Common Errors', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/09_Lists_Tuples_Sets_Dicts/06_Common_Errors.md' },
+                    { name: 'Practice Questions', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/09_Lists_Tuples_Sets_Dicts/07_Practice_Questions.md' }
+                ]
+            },
+            { 
+                title: '10. OOP', 
+                path: 'oop',
+                files: [
+                    { name: 'Overview', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/10_OOP_in_Python/01_Introduction.md' },
+                    { name: 'Classes & Objects', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/10_OOP_in_Python/02_Classes_and_Objects.md' },
+                    { name: 'Inheritance', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/10_OOP_in_Python/03_Inheritance.md' },
+                    { name: 'Polymorphism', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/10_OOP_in_Python/04_Polymorphism.md' },
+                    { name: 'Encapsulation', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/10_OOP_in_Python/05_Encapsulation.md' }
+                ]
+            },
+            { 
+                title: '11. Error Handling', 
+                path: 'errors',
+                files: [
+                    { name: 'Try/Except', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/11_Error_and_Exception_Handling/01_Try_Except.md' },
+                    { name: 'Exception Types', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/11_Error_and_Exception_Handling/02_Exception_Types.md' },
+                    { name: 'Custom Exceptions', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/11_Error_and_Exception_Handling/03_Custom_Exceptions.md' }
+                ]
+            },
+            { 
+                title: '12. File Handling', 
+                path: 'files',
+                files: [
+                    { name: 'File Operations', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/12_File_Handling/01_File_Operations.md' },
+                    { name: 'Reading Files', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/12_File_Handling/02_Reading_Files.md' },
+                    { name: 'Writing Files', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/12_File_Handling/03_Writing_Files.md' }
+                ]
+            },
+            { 
+                title: '13. Iterators & Generators', 
+                path: 'iterators',
+                files: [
+                    { name: 'Iterators', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/13_Iterators_and_Generators/01_Iterators.md' },
+                    { name: 'Generators', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/13_Iterators_and_Generators/02_Generators.md' }
+                ]
+            },
+            { 
+                title: '14. Decorators', 
+                path: 'decorators',
+                files: [
+                    { name: 'Function Decorators', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/14_Decorators/01_Function_Decorators.md' },
+                    { name: 'Class Decorators', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/14_Decorators/02_Class_Decorators.md' }
+                ]
+            },
+            { 
+                title: '15. Comprehensions', 
+                path: 'comprehensions',
+                files: [
+                    { name: 'List Comprehensions', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/15_Comprehensions/01_List_Comprehensions.md' },
+                    { name: 'Dict Comprehensions', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/15_Comprehensions/02_Dict_Comprehensions.md' },
+                    { name: 'Set Comprehensions', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/15_Comprehensions/03_Set_Comprehensions.md' }
+                ]
+            },
+            { 
+                title: '16. Standard Library', 
+                path: 'stdlib',
+                files: [
+                    { name: 'Collections', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/16_Standard_Library_Overview/01_Collections.md' },
+                    { name: 'Itertools', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/16_Standard_Library_Overview/02_Itertools.md' },
+                    { name: 'Functools', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/16_Standard_Library_Overview/03_Functools.md' }
+                ]
+            },
+            { 
+                title: '17. Advanced Topics', 
+                path: 'advanced',
+                files: [
+                    { name: 'Metaclasses', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/17_Advanced_Topics/01_Metaclasses.md' },
+                    { name: 'Context Managers', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/17_Advanced_Topics/02_Context_Managers.md' },
+                    { name: 'Descriptors', file: 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/17_Advanced_Topics/03_Descriptors.md' }
+                ]
+            }
         ];
 
         class App {
             constructor() {
                 this.modules = MODULES;
-                this.fuse = new Fuse(this.modules, { keys: ['title'], threshold: 0.3 });
+                this.flatList = MODULES.flatMap(m => m.files.map(f => ({ title: `${m.title} > ${f.name}`, path: f.file })));
+                this.fuse = new Fuse(this.flatList, { keys: ['title'], threshold: 0.3 });
                 this.init();
             }
             init() {
@@ -117,9 +286,24 @@
             }
             renderSidebar() {
                 const tree = document.getElementById('nav-tree');
-                tree.innerHTML = this.modules.map(mod => `<div class="nav-item" data-path="${mod.path}">${mod.title}</div>`).join('');
+                tree.innerHTML = this.modules.map(mod => `
+                    <div class="nav-group">
+                        <div class="nav-group-title" onclick="document.querySelector('[data-group=${mod.path}]').classList.toggle('collapsed')">
+                            <span class="toggle">▼</span> ${mod.title}
+                        </div>
+                        <div class="nav-submenu" data-group="${mod.path}">
+                            ${mod.files.map(f => `<div class="nav-item" data-file="${btoa(f.file)}">${f.name}</div>`).join('')}
+                        </div>
+                    </div>
+                `).join('');
+
                 tree.querySelectorAll('.nav-item').forEach(el => {
-                    el.addEventListener('click', () => { window.location.hash = el.dataset.path; });
+                    el.addEventListener('click', () => {
+                        const file = atob(el.dataset.file);
+                        this.loadContentFromUrl(file);
+                        document.querySelectorAll('.nav-item').forEach(e => e.classList.remove('active'));
+                        el.classList.add('active');
+                    });
                 });
             }
             bindEvents() {
@@ -134,45 +318,45 @@
                     const query = e.target.value;
                     if (!query) { results.classList.add('hidden'); return; }
                     const hits = this.fuse.search(query);
-                    results.innerHTML = hits.length === 0 ? '<div style="padding:10px; color:#888;">No results</div>' : hits.map(h => `<div class="result-item" data-path="${h.item.path}"><strong>${h.item.title}</strong></div>`).join('');
-                    results.querySelectorAll('.result-item').forEach(el => {
-                        el.addEventListener('click', () => {
-                            window.location.hash = el.dataset.path;
-                            results.classList.add('hidden');
-                            if (window.innerWidth <= 768) sidebar.classList.remove('visible');
-                        });
-                    });
+                    results.innerHTML = hits.length === 0 ? '<div style="padding:10px; color:#888;">No results</div>' : hits.map(h => `<div class="result-item" onclick="window.app.loadContentFromUrl('${h.item.path}')"><strong>${h.item.title}</strong></div>`).join('');
                     results.classList.remove('hidden');
                 });
             }
             handleRouteChange() {
-                const hash = window.location.hash.slice(1) || 'intro';
-                const module = this.modules.find(m => m.path === hash);
-                if (!module) { window.location.hash = 'intro'; return; }
-                this.loadContent(module);
+                // This can be enhanced to handle URL-based routing if needed
             }
-            async loadContent(module) {
+            async loadContentFromUrl(fileUrl) {
                 const content = document.getElementById('content');
                 const breadcrumbs = document.getElementById('breadcrumbs');
                 const sidebar = document.getElementById('sidebar');
+
                 content.innerHTML = '<div style="text-align:center; padding:2rem; color:#8b949e;">Loading...</div>';
-                breadcrumbs.textContent = module.title;
-                document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-                document.querySelector(`[data-path="${module.path}"]`)?.classList.add('active');
+                breadcrumbs.textContent = 'Loading...';
+                
                 if (window.innerWidth <= 768) sidebar.classList.remove('visible');
+
                 try {
-                    const response = await fetch(module.file);
+                    const response = await fetch(fileUrl);
                     if (!response.ok) throw new Error('File not found');
                     const markdown = await response.text();
                     const html = marked.parse(markdown);
                     content.innerHTML = html;
+                    
+                    // Find and update breadcrumb
+                    const module = this.modules.find(m => m.files.some(f => f.file === fileUrl));
+                    const file = module?.files.find(f => f.file === fileUrl);
+                    if (file && module) {
+                        breadcrumbs.textContent = `${module.title} > ${file.name}`;
+                    }
+
                     content.querySelectorAll('pre code').forEach(block => { hljs.highlightElement(block); });
                 } catch (error) {
                     content.innerHTML = `<div style="color: #f85149;"><strong>Error loading content:</strong><br>${error.message}</div>`;
                 }
             }
         }
-        document.addEventListener('DOMContentLoaded', () => new App());
+        window.app = new App();
+        document.addEventListener('DOMContentLoaded', () => {});
     </script>
 </body>
 </html>
