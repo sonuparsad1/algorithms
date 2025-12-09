@@ -11,6 +11,13 @@
             padding: 1.5rem;
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .module-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
         }
         
         .module-card h4 {
@@ -31,6 +38,8 @@
             background-color: #3498db;
             color: white;
             text-decoration: none;
+            border: none;
+            cursor: pointer;
             border-radius: 4px;
             transition: background-color 0.3s ease;
         }
@@ -44,6 +53,142 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin: 2rem 0;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+            overflow: auto;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 1rem;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: #2c3e50;
+        }
+
+        .close-btn {
+            font-size: 2rem;
+            cursor: pointer;
+            color: #7f8c8d;
+            background: none;
+            border: none;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+        }
+
+        .close-btn:hover {
+            color: #e74c3c;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #3498db;
+        }
+
+        .error-msg {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 4px;
+            border: 1px solid #f5c6cb;
+        }
+
+        .content-area {
+            line-height: 1.8;
+        }
+
+        .content-area h1 {
+            color: #2c3e50;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 0.5rem;
+        }
+
+        .content-area h2 {
+            color: #34495e;
+            margin-top: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .content-area h3 {
+            color: #3498db;
+            margin-top: 1rem;
+        }
+
+        .content-area code {
+            background-color: #f4f4f4;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .content-area pre {
+            background-color: #f4f4f4;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+
+        .content-area ul, .content-area ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-area li {
+            margin-bottom: 0.5rem;
+        }
+
+        .content-area a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .content-area a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .modules-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 1rem auto;
+                max-height: 90vh;
+            }
         }
     </style>
 </head>
@@ -72,87 +217,87 @@
                 <div class="module-card">
                     <h4>1. Introduction</h4>
                     <p>Python basics and getting started</p>
-                    <a href="viewer.html?file=../Python_Theory/01_Introduction/01_Definition.md&type=markdown" class="btn-view">View Content</a>
+                    <button class="btn-view" onclick="loadContent('Introduction', '../Python_Theory/01_Introduction/01_Definition.md')">View Content</button>
                 </div>
                 <div class="module-card">
                     <h4>2. Basic Syntax</h4>
                     <p>Indentation, comments, variables</p>
-                    <a href="viewer.html?file=../Python_Theory/02_Basic_Syntax/01_Indentation_and_Comments.md&type=markdown" class="btn-view">View Content</a>
+                    <button class="btn-view" onclick="loadContent('Basic Syntax', '../Python_Theory/02_Basic_Syntax/01_Indentation_and_Comments.md')">View Content</button>
                 </div>
                 <div class="module-card">
                     <h4>3. Data Types</h4>
                     <p>Numbers, strings, booleans</p>
-                    <a href="viewer.html?file=../Python_Theory/03_Data_Types/01_Overview.md&type=markdown" class="btn-view">View Content</a>
+                    <button class="btn-view" onclick="loadContent('Data Types', '../Python_Theory/03_Data_Types/01_Overview.md')">View Content</button>
                 </div>
                 <div class="module-card">
                     <h4>4. Operators & Expressions</h4>
                     <p>Arithmetic, logical, comparison</p>
-                    <a href="viewer.html?file=../Python_Theory/04_Operators_and_Expressions/01_Arithmetic.md&type=markdown" class="btn-view">View Content</a>
+                    <button class="btn-view" onclick="loadContent('Operators & Expressions', '../Python_Theory/04_Operators_and_Expressions/01_Arithmetic.md')">View Content</button>
                 </div>
                 <div class="module-card">
                     <h4>5. Control Flow</h4>
                     <p>If/else, loops, loop control</p>
-                    <a href="viewer.html?file=../Python_Theory/05_Control_Flow/01_Conditional_Statements.md&type=markdown" class="btn-view">View Content</a>
+                    <button class="btn-view" onclick="loadContent('Control Flow', '../Python_Theory/05_Control_Flow/01_Conditional_Statements.md')">View Content</button>
                 </div>
                 <div class="module-card">
                     <h4>6. Functions</h4>
                     <p>Definition, parameters, return values</p>
-                    <a href="viewer.html?file=../Python_Theory/06_Functions/01_Definition_Syntax.md&type=markdown" class="btn-view">View Content</a>
+                    <button class="btn-view" onclick="loadContent('Functions', '../Python_Theory/06_Functions/01_Definition_Syntax.md')">View Content</button>
                 </div>
                 <div class="module-card">
                     <h4>7. Modules & Packages</h4>
                     <p>Imports, packages, namespaces</p>
-                    <a href="viewer.html?file=../Python_Theory/07_Modules_and_Packages/01_Definition.md&type=markdown" class="btn-view">View Content</a>
+                    <button class="btn-view" onclick="loadContent('Modules & Packages', '../Python_Theory/07_Modules_and_Packages/01_Definition.md')">View Content</button>
                 </div>
                 <div class="module-card">
                     <h4>8. Strings</h4>
                     <p>String operations, methods, formatting</p>
-                    <a href="viewer.html?file=../Python_Theory/08_Strings/01_Definition.md&type=markdown" class="btn-view">View Content</a>
+                    <button class="btn-view" onclick="loadContent('Strings', '../Python_Theory/08_Strings/01_Definition.md')">View Content</button>
                 </div>
                 <div class="module-card">
                     <h4>9. Collections</h4>
                     <p>Lists, tuples, sets, dictionaries</p>
-                    <a href="viewer.html?file=../Python_Theory/09_Lists_Tuples_Sets_Dicts/01_Definition.md&type=markdown" class="btn-view">View Content</a>
+                    <button class="btn-view" onclick="loadContent('Collections', '../Python_Theory/09_Lists_Tuples_Sets_Dicts/01_Definition.md')">View Content</button>
                 </div>
                 <div class="module-card">
                     <h4>10. Object-Oriented Programming</h4>
                     <p>Classes, objects, inheritance</p>
-                    <a href="https://github.com/sonuparsad1/algorithms/tree/main/Python_Theory/10_OOP_in_Python" target="_blank" class="btn-view">View on GitHub</a>
+                    <button class="btn-view" onclick="loadContent('OOP', 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/10_OOP_in_Python/README.md')">View Content</button>
                 </div>
                 <div class="module-card">
                     <h4>11. Error Handling</h4>
                     <p>Try/except, custom exceptions</p>
-                    <a href="https://github.com/sonuparsad1/algorithms/tree/main/Python_Theory/11_Error_and_Exception_Handling" target="_blank" class="btn-view">View on GitHub</a>
+                    <button class="btn-view" onclick="loadContent('Error Handling', 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/11_Error_and_Exception_Handling/README.md')">View Content</button>
                 </div>
                 <div class="module-card">
                     <h4>12. File Handling</h4>
                     <p>Read, write, file operations</p>
-                    <a href="https://github.com/sonuparsad1/algorithms/tree/main/Python_Theory/12_File_Handling" target="_blank" class="btn-view">View on GitHub</a>
+                    <button class="btn-view" onclick="loadContent('File Handling', 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/12_File_Handling/README.md')">View Content</button>
                 </div>
                 <div class="module-card">
                     <h4>13. Iterators & Generators</h4>
                     <p>Advanced iteration patterns</p>
-                    <a href="https://github.com/sonuparsad1/algorithms/tree/main/Python_Theory/13_Iterators_and_Generators" target="_blank" class="btn-view">View on GitHub</a>
+                    <button class="btn-view" onclick="loadContent('Iterators & Generators', 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/13_Iterators_and_Generators/README.md')">View Content</button>
                 </div>
                 <div class="module-card">
                     <h4>14. Decorators</h4>
                     <p>Function and class decorators</p>
-                    <a href="https://github.com/sonuparsad1/algorithms/tree/main/Python_Theory/14_Decorators" target="_blank" class="btn-view">View on GitHub</a>
+                    <button class="btn-view" onclick="loadContent('Decorators', 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/14_Decorators/README.md')">View Content</button>
                 </div>
                 <div class="module-card">
                     <h4>15. Comprehensions</h4>
                     <p>List, set, dict comprehensions</p>
-                    <a href="https://github.com/sonuparsad1/algorithms/tree/main/Python_Theory/15_Comprehensions" target="_blank" class="btn-view">View on GitHub</a>
+                    <button class="btn-view" onclick="loadContent('Comprehensions', 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/15_Comprehensions/README.md')">View Content</button>
                 </div>
                 <div class="module-card">
                     <h4>16. Standard Library</h4>
                     <p>Key modules and utilities</p>
-                    <a href="https://github.com/sonuparsad1/algorithms/tree/main/Python_Theory/16_Standard_Library_Overview" target="_blank" class="btn-view">View on GitHub</a>
+                    <button class="btn-view" onclick="loadContent('Standard Library', 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/16_Standard_Library_Overview/README.md')">View Content</button>
                 </div>
                 <div class="module-card">
                     <h4>17. Advanced Topics</h4>
                     <p>Metaclasses, context managers</p>
-                    <a href="https://github.com/sonuparsad1/algorithms/tree/main/Python_Theory/17_Advanced_Topics" target="_blank" class="btn-view">View on GitHub</a>
+                    <button class="btn-view" onclick="loadContent('Advanced Topics', 'https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/17_Advanced_Topics/README.md')">View Content</button>
                 </div>
             </div>
             
@@ -169,10 +314,23 @@
             </ul>
             
             <p style="margin-top: 2rem; padding: 1rem; background-color: #e8f4f8; border-left: 4px solid #3498db; border-radius: 4px;">
-                💡 <strong>Tip:</strong> Start with Module 1 (Introduction) and progress sequentially. Each module builds upon previous concepts. Click "View Content" to access the detailed materials, or "View on GitHub" to see all files in that module.
+                💡 <strong>Tip:</strong> Click on any module card to view the content directly on this page. Content loads instantly without leaving the page.
             </p>
         </div>
     </main>
+    
+    <!-- Modal for displaying content -->
+    <div id="contentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Module Content</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="modalBody" class="content-area">
+                <div class="loading">Loading content...</div>
+            </div>
+        </div>
+    </div>
     
     <footer class="site-footer">
         <div class="container">
@@ -182,6 +340,101 @@
             </p>
         </div>
     </footer>
+    
+    <script>
+        const modal = document.getElementById('contentModal');
+        const modalBody = document.getElementById('modalBody');
+        const modalTitle = document.getElementById('modalTitle');
+
+        function loadContent(title, filePath) {
+            modal.style.display = 'block';
+            modalTitle.textContent = title;
+            modalBody.innerHTML = '<div class="loading">Loading content...</div>';
+
+            let url = filePath;
+            
+            // Convert relative paths to GitHub raw URLs
+            if (filePath.startsWith('../')) {
+                url = filePath.substring(3); // Remove ../
+                url = `https://raw.githubusercontent.com/sonuparsad1/algorithms/main/${url}`;
+            }
+
+            console.log('Fetching from:', url);
+
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/vnd.raw'
+                },
+                mode: 'cors'
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: File not found`);
+                }
+                return response.text();
+            })
+            .then(content => {
+                // Convert markdown to HTML
+                let html = markdownToHtml(content);
+                modalBody.innerHTML = html;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                modalBody.innerHTML = `<div class="error-msg">
+                    <strong>Error loading content:</strong><br>
+                    ${error.message}<br><br>
+                    <strong>File path:</strong> ${filePath}<br>
+                    <strong>URL:</strong> <a href="${url}" target="_blank">${url}</a>
+                </div>`;
+            });
+        }
+
+        function markdownToHtml(markdown) {
+            let html = markdown
+                // Code blocks with triple backticks
+                .replace(/```[\s\S]*?```/g, (match) => {
+                    let code = match.slice(3, -3).trim();
+                    code = code.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                    return `<pre><code>${code}</code></pre>`;
+                })
+                // Headers
+                .replace(/^### (.*?)$/gm, '<h3>$1</h3>')
+                .replace(/^## (.*?)$/gm, '<h2>$1</h2>')
+                .replace(/^# (.*?)$/gm, '<h1>$1</h1>')
+                // Bold
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/__(.*?)__/g, '<strong>$1</strong>')
+                // Italic
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/_(.*?)_/g, '<em>$1</em>')
+                // Links
+                .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank">$1</a>')
+                // Inline code
+                .replace(/`([^`]+)`/g, '<code>$1</code>')
+                // Unordered lists
+                .replace(/^\* (.*?)$/gm, '<li>$1</li>')
+                .replace(/^- (.*?)$/gm, '<li>$1</li>')
+                // Ordered lists
+                .replace(/^\d+\. (.*?)$/gm, '<li>$1</li>')
+                // Line breaks
+                .replace(/\n\n/g, '</p><p>')
+                .replace(/\n/g, '<br>');
+
+            return `<p>${html}</p>`;
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
     
     <style>
         * {
