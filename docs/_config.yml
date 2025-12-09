@@ -7,6 +7,7 @@ title: Algorithms & Data Structures
 description: A comprehensive repository of algorithms, data structures, and Python programming concepts
 author: Sonu Parsad
 url: https://sonuparsad1.github.io/algorithms
+baseurl: /algorithms
 
 # Navigation
 header_pages:
@@ -28,13 +29,23 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
 
+# Defaults
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+
 # Exclude files
 exclude:
   - .git/
   - .gitignore
   - README.md
   - CLONE_GUIDE.md
+  - GITHUB_PAGES_SETUP.md
   - venv/
   - __pycache__/
   - *.pyc
   - node_modules/
+  - Gemfile
+  - Gemfile.lock
