@@ -27,26 +27,33 @@
             
             <h3>📚 Learning Topics</h3>
             
-            <h4 style="margin-top: 1.5rem; color: #3498db;">Array Creation Methods</h4>
-            <p>Learn various ways to create and initialize NumPy arrays.</p>
-            <ul>
-                <li>Creating arrays from lists</li>
-                <li>Using NumPy functions (zeros, ones, arange, linspace)</li>
-                <li>Random array generation</li>
-                <li>Reshaping arrays</li>
-            </ul>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0;">
+                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <h4 style="color: #3498db; margin-bottom: 0.5rem;">🔨 Array Creation Methods</h4>
+                    <p style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 1rem;">Learn various ways to create and initialize NumPy arrays. Master array generation functions.</p>
+                    <ul style="font-size: 0.9rem; margin: 0.5rem 0;">
+                        <li>Creating arrays from lists</li>
+                        <li>NumPy functions (zeros, ones, arange)</li>
+                        <li>Random array generation</li>
+                        <li>Reshaping arrays</li>
+                    </ul>
+                    <a href="../nunpy/numpy_creating_arry/main.py" target="_blank" class="btn" style="font-size: 0.9rem; padding: 0.5rem 1rem; margin-top: 1rem;">View Code</a>
+                </div>
+                
+                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <h4 style="color: #3498db; margin-bottom: 0.5rem;">🎯 Array Indexing</h4>
+                    <p style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 1rem;">Master different indexing techniques to access array elements efficiently.</p>
+                    <ul style="font-size: 0.9rem; margin: 0.5rem 0;">
+                        <li>Basic indexing and slicing</li>
+                        <li>Boolean indexing</li>
+                        <li>Fancy indexing</li>
+                        <li>Multi-dimensional access</li>
+                    </ul>
+                    <a href="../nunpy/numpy%20arry%20indexing/main.py" target="_blank" class="btn" style="font-size: 0.9rem; padding: 0.5rem 1rem; margin-top: 1rem;">View Code</a>
+                </div>
+            </div>
             
-            <h4 style="margin-top: 1.5rem; color: #3498db;">Array Indexing</h4>
-            <p>Master different indexing techniques to access array elements.</p>
-            <ul>
-                <li>Basic indexing</li>
-                <li>Slicing arrays</li>
-                <li>Boolean indexing</li>
-                <li>Fancy indexing</li>
-                <li>Multi-dimensional indexing</li>
-            </ul>
-            
-            <h3>🎯 Learning Path</h3>
+            <h3 style="margin-top: 3rem;">🎯 Learning Path</h3>
             <ol>
                 <li><strong>Start with Array Creation</strong> - Learn how to create different types of arrays</li>
                 <li><strong>Master Indexing</strong> - Understand how to access and modify array elements</li>
@@ -62,13 +69,31 @@ arr = np.array([1, 2, 3, 4, 5])
 # Index and slice
 print(arr[0])      # First element
 print(arr[1:3])    # Elements 1 and 2
+
+# Create with functions
+zeros = np.zeros(5)
+ones = np.ones(5)
+arange = np.arange(0, 10, 2)
 </code></pre>
             
-            <h3>📖 Getting Started</h3>
-            <p>Visit the <a href="getting-started.html">Getting Started</a> page to clone the repository and begin learning.</p>
+            <h3>📖 Additional Topics</h3>
+            <ul>
+                <li>NumPy mathematical operations</li>
+                <li>Broadcasting and vectorization</li>
+                <li>Working with multi-dimensional arrays</li>
+                <li>File I/O with NumPy</li>
+                <li>Performance optimization</li>
+            </ul>
+            
+            <h3>📚 Resources</h3>
+            <ul>
+                <li><strong><a href="https://numpy.org/doc/" target="_blank">NumPy Official Documentation</a></strong></li>
+                <li><strong><a href="../nunpy/">NumPy Examples Folder</a></strong> - View all code examples</li>
+                <li><strong><a href="getting-started.html">Getting Started</a></strong> - Setup instructions</li>
+            </ul>
             
             <p style="margin-top: 2rem; padding: 1rem; background-color: #e8f4f8; border-left: 4px solid #3498db; border-radius: 4px;">
-                💡 <strong>Tip:</strong> Make sure NumPy is installed before running examples. See Getting Started for installation instructions.
+                💡 <strong>Tip:</strong> Make sure NumPy is installed before running examples. See Getting Started for installation instructions. Click "View Code" to see practical examples.
             </p>
         </div>
     </main>
