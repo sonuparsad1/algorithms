@@ -1,0 +1,16 @@
+{
+    "configurations": [
+        {
+            "type": "msedge",
+            "name": "http://127.0.0.1:3000/Algorithms-and-Data-Structures-Python/web_viewer/public/01_Pure_Mathematics/02_Linear_Algebra/02_Methods_and_Algorithms.html",
+            "request": "launch",
+            "url": "http://127.0.0.1:3000/Algorithms-and-Data-Structures-Python/web_viewer/public/01_Pure_Mathematics/02_Linear_Algebra/02_Methods_and_Algorithms.html"
+        },
+        {
+            "type": "msedge",
+            "name": "http://127.0.0.1:3000/Algorithms-and-Data-Structures-Python/web_viewer/index.html",
+            "request": "launch",
+            "url": "http://127.0.0.1:3000/Algorithms-and-Data-Structures-Python/web_viewer/index.html"
+        }
+    ]
+}

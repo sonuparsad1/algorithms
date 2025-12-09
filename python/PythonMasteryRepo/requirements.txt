@@ -1,0 +1,6 @@
+# Standard library is preferred, but for some advanced testing or optional examples:
+pytest
+black
+mypy
+flake8
+requests  # For some concurrent/IO examples

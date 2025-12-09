@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithms & Data Structures</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="src/css/main.css">
+
+    <!-- Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+    <script>
+        window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        #debug-console {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: rgba(0, 0, 0, 0.9);
+            color: #0f0;
+            font-family: monospace;
+            z-index: 10000;
+            overflow-y: auto;
+            padding: 10px;
+            border-top: 2px solid #0f0;
+            display: none;
+            /* Hidden by default, toggle with Ctrl+Shift+D */
+        }
+
+        #debug-console .log-entry {
+            margin-bottom: 2px;
+            border-bottom: 1px solid #333;
+        }
+
+        #debug-console .error {
+            color: #f55;
+            font-weight: bold;
+        }
+
+        .debug-toggle-btn {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            z-index: 10001;
+            background: #333;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            opacity: 0.5;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Spotlight Effect -->
+    <div id="spotlight-overlay"></div>
+
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="brand">ALGORITHMS</div>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search topics...">
+                <div id="searchResults" class="search-results hidden"></div>
+            </div>
+
+            <nav class="nav-tree" id="nav-tree">
+                <!-- Javascript will populate this -->
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="top-bar">
+                <button id="menu-toggle" class="menu-toggle" aria-label="Toggle Menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <div id="breadcrumbs" class="breadcrumbs"></div>
+            </header>
+
+            <div class="content-scroll-container" id="content-scroll">
+                <div id="content" class="markdown-body">
+                    <!-- Dynamic Content -->
+                    <div class="welcome-screen">
+                        <h1>Welcome to the Knowledge Base</h1>
+                        <p>Select a topic from the sidebar to begin exploring.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Debug Console -->
+    <div id="debug-toggle" class="debug-toggle-btn"
+        onclick="document.getElementById('debug-console').style.display = document.getElementById('debug-console').style.display === 'none' ? 'block' : 'none'">
+        Debug</div>
+    <div id="debug-console"></div>
+
+    <script>
+        // VISUAL LOGGER
+        (function () {
+            const consoleEl = document.getElementById('debug-console');
+
+            function logToScreen(msg, type = 'info') {
+                const el = document.createElement('div');
+                el.className = 'log-entry ' + type;
+                el.innerText = `[${new Date().toLocaleTimeString()}] ${msg}`;
+                consoleEl.appendChild(el);
+                consoleEl.scrollTop = consoleEl.scrollHeight;
+
+                // Also force show if error
+                if (type === 'error' && consoleEl.style.display === 'none') {
+                    consoleEl.style.display = 'block';
+                }
+            }
+
+            const originalLog = console.log;
+            console.log = function (...args) {
+                originalLog.apply(console, args);
+                logToScreen(args.join(' '));
+            };
+
+            const originalErr = console.error;
+            console.error = function (...args) {
+                originalErr.apply(console, args);
+                logToScreen(args.join(' '), 'error');
+            };
+
+            window.onerror = function (msg, url, line, col, error) {
+                logToScreen(`Global Error: ${msg} [${line}:${col}]`, 'error');
+                return false;
+            };
+
+            logToScreen("Logger Initialized. Waiting for App...");
+        })();
+    </script>
+
+    <!-- Data & Scripts -->
+    <!-- Load Data -->
+    <!-- v=6 to force refresh after Python Theory update -->
+    <script src="../../data.js?v=6"></script>
+    <script src="src/js/router.js?v=5"></script>
+    <script src="src/js/app.js?v=5"></script>
+</body>
+
+</html>

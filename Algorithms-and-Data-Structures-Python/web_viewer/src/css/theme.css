@@ -1,0 +1,52 @@
+:root {
+    /* Color Palette - Professional Dark (Stripe/Vercel inspired) */
+    --color-bg-deep: #000000;
+    --color-bg-card: #0a0a0a;
+    --color-bg-sidebar: #050505;
+
+    --color-primary: #3b82f6;
+    /* Professional Blue */
+    --color-primary-dim: #2563eb;
+    --color-primary-glow: rgba(59, 130, 246, 0.2);
+
+    --color-text-main: #ededed;
+    --color-text-sub: #a1a1aa;
+    --color-text-muted: #52525b;
+
+    --color-border: #27272a;
+    --color-border-hover: #3f3f46;
+
+    /* Typography */
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+    /* Spacing & Params */
+    --sidebar-width: 280px;
+    --header-height: 50px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+
+    /* Effects */
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.7);
+    --trans-fast: 0.15s ease;
+    --trans-smooth: 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
