@@ -159,7 +159,7 @@
     <script>
         // Get the file path from URL parameter
         const urlParams = new URLSearchParams(window.location.search);
-        const filePath = urlParams.get('file');
+        let filePath = urlParams.get('file');
         const fileType = urlParams.get('type') || 'text';
         
         const contentDiv = document.querySelector('.content-loader');
@@ -167,8 +167,22 @@
         if (!filePath) {
             contentDiv.innerHTML = '<div class="error-message"><strong>Error:</strong> No file specified</div>';
         } else {
+            // Convert relative path to GitHub raw content URL
+            // Example: ../Python_Theory/02_Basic_Syntax/01_Indentation_and_Comments.md
+            // Should become: https://raw.githubusercontent.com/sonuparsad1/algorithms/main/Python_Theory/02_Basic_Syntax/01_Indentation_and_Comments.md
+            
+            let githubUrl = filePath;
+            
+            // Remove ../ from the beginning
+            if (githubUrl.startsWith('../')) {
+                githubUrl = githubUrl.substring(3);
+            }
+            
+            // Build the GitHub raw content URL
+            const rawUrl = `https://raw.githubusercontent.com/sonuparsad1/algorithms/main/${githubUrl}`;
+            
             // Fetch and display the file
-            fetch(filePath)
+            fetch(rawUrl)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error(`File not found: ${filePath}`);
@@ -196,7 +210,7 @@
                 })
                 .catch(error => {
                     contentDiv.innerHTML = '<div class="error-message"><strong>Error loading file:</strong> ' + error.message + 
-                                          '<br><br><strong>Note:</strong> This file might not be available on GitHub Pages. ' +
+                                          '<br><br><strong>Note:</strong> This file might not be available. ' +
                                           'Please visit the <a href="https://github.com/sonuparsad1/algorithms" target="_blank">GitHub repository</a> to view the raw files.</div>';
                     console.error('Error:', error);
                 });
