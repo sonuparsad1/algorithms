@@ -22,6 +22,7 @@
         #searchInput { width: 100%; padding: 0.6rem 0.8rem; background: #0d1117; border: 1px solid #30363d; color: #c9d1d9; border-radius: 4px; font-family: 'Inter', sans-serif; }
         #searchInput:focus { outline: none; border-color: #58a6ff; box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.1); }
         .search-results { position: absolute; top: 60px; left: 10px; width: 260px; background: #161b22; border: 1px solid #30363d; border-radius: 4px; max-height: 300px; overflow-y: auto; z-index: 100; }
+        .search-results.hidden { display: none; }
         .result-item { padding: 0.6rem 0.8rem; cursor: pointer; border-bottom: 1px solid #30363d; }
         .result-item:hover { background: rgba(88, 166, 255, 0.1); }
         .nav-tree { padding: 1rem 0; }
@@ -286,9 +287,9 @@
             }
             renderSidebar() {
                 const tree = document.getElementById('nav-tree');
-                tree.innerHTML = this.modules.map(mod => `
-                    <div class="nav-group">
-                        <div class="nav-group-title" onclick="document.querySelector('[data-group=${mod.path}]').classList.toggle('collapsed')">
+                tree.innerHTML = this.modules.map((mod, idx) => `
+                    <div class="nav-group" data-module-idx="${idx}">
+                        <div class="nav-group-title">
                             <span class="toggle">▼</span> ${mod.title}
                         </div>
                         <div class="nav-submenu" data-group="${mod.path}">
@@ -312,6 +313,16 @@
                 toggle.addEventListener('click', () => {
                     if (window.innerWidth <= 768) sidebar.classList.toggle('visible');
                 });
+                
+                // Handle nav-group-title clicks for toggle
+                const tree = document.getElementById('nav-tree');
+                tree.addEventListener('click', (e) => {
+                    if (e.target.closest('.nav-group-title')) {
+                        const group = e.target.closest('.nav-group');
+                        group.classList.toggle('collapsed');
+                    }
+                });
+                
                 const search = document.getElementById('searchInput');
                 const results = document.getElementById('searchResults');
                 search.addEventListener('input', (e) => {
