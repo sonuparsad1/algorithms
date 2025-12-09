@@ -5,6 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Python Theory - Algorithms & Data Structures</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .module-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .module-card h4 {
+            color: #3498db;
+            margin-bottom: 0.5rem;
+        }
+        
+        .module-card p {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+        }
+        
+        .btn-view {
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn-view:hover {
+            background-color: #2980b9;
+        }
+        
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+    </style>
 </head>
 <body>
     <header class="site-header">
@@ -27,107 +68,91 @@
             
             <h3>📚 Learning Modules</h3>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0;">
-                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                    <h4 style="color: #3498db; margin-bottom: 0.5rem;">1. Introduction</h4>
-                    <p style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 1rem;">Python basics and getting started</p>
-                    <a href="../Python_Theory/01_Introduction/01_Definition.md" target="_blank" class="btn" style="font-size: 0.9rem; padding: 0.5rem 1rem;">View Content</a>
+            <div class="modules-grid">
+                <div class="module-card">
+                    <h4>1. Introduction</h4>
+                    <p>Python basics and getting started</p>
+                    <a href="viewer.html?file=../Python_Theory/01_Introduction/01_Definition.md&type=markdown" class="btn-view">View Content</a>
                 </div>
-                
-                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                    <h4 style="color: #3498db; margin-bottom: 0.5rem;">2. Basic Syntax</h4>
-                    <p style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 1rem;">Indentation, comments, variables</p>
-                    <a href="../Python_Theory/02_Basic_Syntax/01_Indentation_and_Comments.md" target="_blank" class="btn" style="font-size: 0.9rem; padding: 0.5rem 1rem;">View Content</a>
+                <div class="module-card">
+                    <h4>2. Basic Syntax</h4>
+                    <p>Indentation, comments, variables</p>
+                    <a href="viewer.html?file=../Python_Theory/02_Basic_Syntax/01_Indentation_and_Comments.md&type=markdown" class="btn-view">View Content</a>
                 </div>
-                
-                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                    <h4 style="color: #3498db; margin-bottom: 0.5rem;">3. Data Types</h4>
-                    <p style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 1rem;">Numbers, strings, booleans</p>
-                    <a href="../Python_Theory/03_Data_Types/01_Overview.md" target="_blank" class="btn" style="font-size: 0.9rem; padding: 0.5rem 1rem;">View Content</a>
+                <div class="module-card">
+                    <h4>3. Data Types</h4>
+                    <p>Numbers, strings, booleans</p>
+                    <a href="viewer.html?file=../Python_Theory/03_Data_Types/01_Overview.md&type=markdown" class="btn-view">View Content</a>
                 </div>
-                
-                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                    <h4 style="color: #3498db; margin-bottom: 0.5rem;">4. Operators & Expressions</h4>
-                    <p style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 1rem;">Arithmetic, logical, comparison</p>
-                    <a href="../Python_Theory/04_Operators_and_Expressions/01_Arithmetic.md" target="_blank" class="btn" style="font-size: 0.9rem; padding: 0.5rem 1rem;">View Content</a>
+                <div class="module-card">
+                    <h4>4. Operators & Expressions</h4>
+                    <p>Arithmetic, logical, comparison</p>
+                    <a href="viewer.html?file=../Python_Theory/04_Operators_and_Expressions/01_Arithmetic.md&type=markdown" class="btn-view">View Content</a>
                 </div>
-                
-                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                    <h4 style="color: #3498db; margin-bottom: 0.5rem;">5. Control Flow</h4>
-                    <p style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 1rem;">If/else, loops, loop control</p>
-                    <a href="../Python_Theory/05_Control_Flow/01_Conditional_Statements.md" target="_blank" class="btn" style="font-size: 0.9rem; padding: 0.5rem 1rem;">View Content</a>
+                <div class="module-card">
+                    <h4>5. Control Flow</h4>
+                    <p>If/else, loops, loop control</p>
+                    <a href="viewer.html?file=../Python_Theory/05_Control_Flow/01_Conditional_Statements.md&type=markdown" class="btn-view">View Content</a>
                 </div>
-                
-                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                    <h4 style="color: #3498db; margin-bottom: 0.5rem;">6. Functions</h4>
-                    <p style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 1rem;">Definition, parameters, return values</p>
-                    <a href="../Python_Theory/06_Functions/01_Definition_Syntax.md" target="_blank" class="btn" style="font-size: 0.9rem; padding: 0.5rem 1rem;">View Content</a>
+                <div class="module-card">
+                    <h4>6. Functions</h4>
+                    <p>Definition, parameters, return values</p>
+                    <a href="viewer.html?file=../Python_Theory/06_Functions/01_Definition_Syntax.md&type=markdown" class="btn-view">View Content</a>
                 </div>
-                
-                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                    <h4 style="color: #3498db; margin-bottom: 0.5rem;">7. Modules & Packages</h4>
-                    <p style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 1rem;">Imports, packages, namespaces</p>
-                    <a href="../Python_Theory/07_Modules_and_Packages/01_Definition.md" target="_blank" class="btn" style="font-size: 0.9rem; padding: 0.5rem 1rem;">View Content</a>
+                <div class="module-card">
+                    <h4>7. Modules & Packages</h4>
+                    <p>Imports, packages, namespaces</p>
+                    <a href="viewer.html?file=../Python_Theory/07_Modules_and_Packages/01_Definition.md&type=markdown" class="btn-view">View Content</a>
                 </div>
-                
-                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                    <h4 style="color: #3498db; margin-bottom: 0.5rem;">8. Strings</h4>
-                    <p style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 1rem;">String operations, methods, formatting</p>
-                    <a href="../Python_Theory/08_Strings/01_Definition.md" target="_blank" class="btn" style="font-size: 0.9rem; padding: 0.5rem 1rem;">View Content</a>
+                <div class="module-card">
+                    <h4>8. Strings</h4>
+                    <p>String operations, methods, formatting</p>
+                    <a href="viewer.html?file=../Python_Theory/08_Strings/01_Definition.md&type=markdown" class="btn-view">View Content</a>
                 </div>
-                
-                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                    <h4 style="color: #3498db; margin-bottom: 0.5rem;">9. Collections</h4>
-                    <p style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 1rem;">Lists, tuples, sets, dictionaries</p>
-                    <a href="../Python_Theory/09_Lists_Tuples_Sets_Dicts/01_Definition.md" target="_blank" class="btn" style="font-size: 0.9rem; padding: 0.5rem 1rem;">View Content</a>
+                <div class="module-card">
+                    <h4>9. Collections</h4>
+                    <p>Lists, tuples, sets, dictionaries</p>
+                    <a href="viewer.html?file=../Python_Theory/09_Lists_Tuples_Sets_Dicts/01_Definition.md&type=markdown" class="btn-view">View Content</a>
                 </div>
-                
-                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                    <h4 style="color: #3498db; margin-bottom: 0.5rem;">10. Object-Oriented Programming</h4>
-                    <p style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 1rem;">Classes, objects, inheritance</p>
-                    <a href="../Python_Theory/10_OOP_in_Python/" target="_blank" class="btn" style="font-size: 0.9rem; padding: 0.5rem 1rem;">View Content</a>
+                <div class="module-card">
+                    <h4>10. Object-Oriented Programming</h4>
+                    <p>Classes, objects, inheritance</p>
+                    <a href="https://github.com/sonuparsad1/algorithms/tree/main/Python_Theory/10_OOP_in_Python" target="_blank" class="btn-view">View on GitHub</a>
                 </div>
-                
-                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                    <h4 style="color: #3498db; margin-bottom: 0.5rem;">11. Error Handling</h4>
-                    <p style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 1rem;">Try/except, custom exceptions</p>
-                    <a href="../Python_Theory/11_Error_and_Exception_Handling/" target="_blank" class="btn" style="font-size: 0.9rem; padding: 0.5rem 1rem;">View Content</a>
+                <div class="module-card">
+                    <h4>11. Error Handling</h4>
+                    <p>Try/except, custom exceptions</p>
+                    <a href="https://github.com/sonuparsad1/algorithms/tree/main/Python_Theory/11_Error_and_Exception_Handling" target="_blank" class="btn-view">View on GitHub</a>
                 </div>
-                
-                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                    <h4 style="color: #3498db; margin-bottom: 0.5rem;">12. File Handling</h4>
-                    <p style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 1rem;">Read, write, file operations</p>
-                    <a href="../Python_Theory/12_File_Handling/" target="_blank" class="btn" style="font-size: 0.9rem; padding: 0.5rem 1rem;">View Content</a>
+                <div class="module-card">
+                    <h4>12. File Handling</h4>
+                    <p>Read, write, file operations</p>
+                    <a href="https://github.com/sonuparsad1/algorithms/tree/main/Python_Theory/12_File_Handling" target="_blank" class="btn-view">View on GitHub</a>
                 </div>
-                
-                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                    <h4 style="color: #3498db; margin-bottom: 0.5rem;">13. Iterators & Generators</h4>
-                    <p style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 1rem;">Advanced iteration patterns</p>
-                    <a href="../Python_Theory/13_Iterators_and_Generators/" target="_blank" class="btn" style="font-size: 0.9rem; padding: 0.5rem 1rem;">View Content</a>
+                <div class="module-card">
+                    <h4>13. Iterators & Generators</h4>
+                    <p>Advanced iteration patterns</p>
+                    <a href="https://github.com/sonuparsad1/algorithms/tree/main/Python_Theory/13_Iterators_and_Generators" target="_blank" class="btn-view">View on GitHub</a>
                 </div>
-                
-                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                    <h4 style="color: #3498db; margin-bottom: 0.5rem;">14. Decorators</h4>
-                    <p style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 1rem;">Function and class decorators</p>
-                    <a href="../Python_Theory/14_Decorators/" target="_blank" class="btn" style="font-size: 0.9rem; padding: 0.5rem 1rem;">View Content</a>
+                <div class="module-card">
+                    <h4>14. Decorators</h4>
+                    <p>Function and class decorators</p>
+                    <a href="https://github.com/sonuparsad1/algorithms/tree/main/Python_Theory/14_Decorators" target="_blank" class="btn-view">View on GitHub</a>
                 </div>
-                
-                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                    <h4 style="color: #3498db; margin-bottom: 0.5rem;">15. Comprehensions</h4>
-                    <p style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 1rem;">List, set, dict comprehensions</p>
-                    <a href="../Python_Theory/15_Comprehensions/" target="_blank" class="btn" style="font-size: 0.9rem; padding: 0.5rem 1rem;">View Content</a>
+                <div class="module-card">
+                    <h4>15. Comprehensions</h4>
+                    <p>List, set, dict comprehensions</p>
+                    <a href="https://github.com/sonuparsad1/algorithms/tree/main/Python_Theory/15_Comprehensions" target="_blank" class="btn-view">View on GitHub</a>
                 </div>
-                
-                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                    <h4 style="color: #3498db; margin-bottom: 0.5rem;">16. Standard Library</h4>
-                    <p style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 1rem;">Key modules and utilities</p>
-                    <a href="../Python_Theory/16_Standard_Library_Overview/" target="_blank" class="btn" style="font-size: 0.9rem; padding: 0.5rem 1rem;">View Content</a>
+                <div class="module-card">
+                    <h4>16. Standard Library</h4>
+                    <p>Key modules and utilities</p>
+                    <a href="https://github.com/sonuparsad1/algorithms/tree/main/Python_Theory/16_Standard_Library_Overview" target="_blank" class="btn-view">View on GitHub</a>
                 </div>
-                
-                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                    <h4 style="color: #3498db; margin-bottom: 0.5rem;">17. Advanced Topics</h4>
-                    <p style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 1rem;">Metaclasses, context managers</p>
-                    <a href="../Python_Theory/17_Advanced_Topics/" target="_blank" class="btn" style="font-size: 0.9rem; padding: 0.5rem 1rem;">View Content</a>
+                <div class="module-card">
+                    <h4>17. Advanced Topics</h4>
+                    <p>Metaclasses, context managers</p>
+                    <a href="https://github.com/sonuparsad1/algorithms/tree/main/Python_Theory/17_Advanced_Topics" target="_blank" class="btn-view">View on GitHub</a>
                 </div>
             </div>
             
@@ -144,7 +169,7 @@
             </ul>
             
             <p style="margin-top: 2rem; padding: 1rem; background-color: #e8f4f8; border-left: 4px solid #3498db; border-radius: 4px;">
-                💡 <strong>Tip:</strong> Start with Module 1 (Introduction) and progress sequentially. Each module builds upon previous concepts. Click "View Content" to access the detailed materials.
+                💡 <strong>Tip:</strong> Start with Module 1 (Introduction) and progress sequentially. Each module builds upon previous concepts. Click "View Content" to access the detailed materials, or "View on GitHub" to see all files in that module.
             </p>
         </div>
     </main>
@@ -283,6 +308,10 @@
                 flex-direction: column;
                 gap: 0.5rem;
                 width: 100%;
+            }
+            
+            .modules-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
