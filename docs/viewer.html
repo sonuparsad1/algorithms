@@ -181,38 +181,76 @@
             // Build the GitHub raw content URL
             const rawUrl = `https://raw.githubusercontent.com/sonuparsad1/algorithms/main/${githubUrl}`;
             
-            // Fetch and display the file
-            fetch(rawUrl)
+            console.log('Fetching file from:', rawUrl);
+            
+            // Fetch with timeout and proper error handling
+            const fetchWithTimeout = (url, timeout = 10000) => {
+                return Promise.race([
+                    fetch(url, {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/vnd.raw'
+                        },
+                        mode: 'cors'
+                    }),
+                    new Promise((_, reject) =>
+                        setTimeout(() => reject(new Error('Fetch timeout')), timeout)
+                    )
+                ]);
+            };
+            
+            fetchWithTimeout(rawUrl)
                 .then(response => {
+                    console.log('Response status:', response.status);
                     if (!response.ok) {
-                        throw new Error(`File not found: ${filePath}`);
+                        throw new Error(`HTTP ${response.status}: File not found`);
                     }
                     return response.text();
                 })
                 .then(content => {
+                    console.log('Content received, length:', content.length);
                     if (fileType === 'markdown') {
-                        // Simple markdown rendering (convert basic markdown to HTML)
+                        // Improved markdown rendering
                         let html = content
+                            // Headers
                             .replace(/^### (.*?)$/gm, '<h3>$1</h3>')
                             .replace(/^## (.*?)$/gm, '<h2>$1</h2>')
                             .replace(/^# (.*?)$/gm, '<h1>$1</h1>')
-                            .replace(/^\* (.*?)$/gm, '<li>$1</li>')
+                            // Code blocks (triple backticks)
+                            .replace(/```([\s\S]*?)```/g, '<pre style="background: #f4f4f4; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code>$1</code></pre>')
+                            // Inline code
+                            .replace(/`([^`]+)`/g, '<code style="background: #f0f0f0; padding: 0.2rem 0.4rem; border-radius: 3px;">$1</code>')
+                            // Bold
                             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                            // Italic
                             .replace(/\*(.*?)\*/g, '<em>$1</em>')
-                            .replace(/`(.*?)`/g, '<code>$1</code>')
+                            // Links
+                            .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank">$1</a>')
+                            // Lists
+                            .replace(/^\* (.*?)$/gm, '<li style="margin-left: 2rem;">$1</li>')
+                            // Paragraphs
+                            .replace(/\n\n/g, '</p><p>')
                             .replace(/\n/g, '<br>');
-                        contentDiv.innerHTML = html;
+                        contentDiv.innerHTML = '<p>' + html + '</p>';
                     } else {
                         // Plain text
-                        contentDiv.innerHTML = '<pre style="overflow-x: auto; background: #f4f4f4; padding: 1rem; border-radius: 4px;">' + 
+                        contentDiv.innerHTML = '<pre style="overflow-x: auto; background: #f4f4f4; padding: 1rem; border-radius: 4px; font-size: 0.9rem;">' + 
                                                content.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</pre>';
                     }
                 })
                 .catch(error => {
-                    contentDiv.innerHTML = '<div class="error-message"><strong>Error loading file:</strong> ' + error.message + 
-                                          '<br><br><strong>Note:</strong> This file might not be available. ' +
-                                          'Please visit the <a href="https://github.com/sonuparsad1/algorithms" target="_blank">GitHub repository</a> to view the raw files.</div>';
-                    console.error('Error:', error);
+                    console.error('Full error:', error);
+                    contentDiv.innerHTML = '<div class="error-message">' +
+                        '<strong>Error loading file:</strong> ' + error.message + 
+                        '<br><br><strong>File path:</strong> ' + filePath +
+                        '<br><strong>GitHub URL:</strong> <a href="' + rawUrl + '" target="_blank">' + rawUrl + '</a>' +
+                        '<br><br><strong>Troubleshooting:</strong>' +
+                        '<ul style="margin-top: 1rem; margin-left: 2rem;">' +
+                        '<li>Check that the file exists in the GitHub repository</li>' +
+                        '<li>Ensure the file path is correct</li>' +
+                        '<li>Try opening the GitHub URL directly in a new tab</li>' +
+                        '<li>You can also visit the <a href="https://github.com/sonuparsad1/algorithms" target="_blank">GitHub repository</a> to view files</li>' +
+                        '</ul></div>';
                 });
         }
     </script>
